@@ -74,6 +74,7 @@
                     {{--</a>--}}
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('task/create') }}">Create a new task</a></li>
+                        <li><a href="{{ url('chat/') }}">Chat</a></li>
                     </ul>
                 </div>
 
