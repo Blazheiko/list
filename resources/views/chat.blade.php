@@ -20,6 +20,12 @@
                         ></chat-form>
 
                     </div>
+                    <div class="panel-footer">
+                        <new-photo
+
+                        ></new-photo>
+
+                    </div>
 
                 </div>
             </div>

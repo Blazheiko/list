@@ -29,6 +29,9 @@ class MessageSent implements ShouldBroadcast
      */
     public $message;
 
+
+    //public $photo_url;
+
     /**
      * Create a new event instance.
      *
@@ -38,6 +41,7 @@ class MessageSent implements ShouldBroadcast
     {
         $this->user = $user;
         $this->message = $message;
+
     }
 
     /**

@@ -11,6 +11,7 @@ window.Vue = require('vue');
 //Vue.component('example', require('./components/Example.vue'));
 Vue.component('chat-messages', require('./components/ChatMessages.vue'));
 Vue.component('chat-form', require('./components/ChatForm.vue'));
+Vue.component('new-photo', require('./components/NewPhoto.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -26,6 +27,7 @@ const app = new Vue({
             .listen('MessageSent', (e) => {
                 this.messages.push({
                     message: e.message.message,
+                    message: e.message.photo_url,
                     user: e.user
                 });
             });
