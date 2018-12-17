@@ -3,6 +3,22 @@
 
         <span>Select New Photo</span>
         <input ref="photo" type="file" class="form-control" name="photo" @change="update">
+        <li class="left clearfix" v-for="photo in photos">
+            <div class="chat-body clearfix">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <img v-bind:src="photo"  style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
+
+                            <!--<img v-bind:src="/uploads/photos/ v-html="message.photo_url "  " style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">-->
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </li>
 
     </div>
 </template>

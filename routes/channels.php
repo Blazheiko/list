@@ -18,5 +18,5 @@ Broadcast::channel('chat', function ($user) {
     return Auth::check();
 });
 Broadcast::channel('photos', function ($user) {
-    return true;
+    return Auth::check();
 });

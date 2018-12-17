@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile',            ['as' => 'profile',   'uses' => 'UserController@profile']);
 Route::post('profile',            ['as' => 'profile.update',  'uses' =>'UserController@update_avatar']);
 
+
 Route::get('/task/create',        ['as' => 'task.create',  'uses' => 'TodolistController@create']);
 Route::post('/task',              ['as' => 'task.store',   'uses' => 'TodolistController@store']);
 Route::get('/task/{task}',        ['as' => 'task.show',    'uses' => 'TodolistController@show']);
@@ -34,6 +35,8 @@ Route::get('send',                ['as' => 'send',         'uses' => 'mailContro
 Route::get('/chat', 'ChatsController@index');
 Route::get('messages', 'ChatsController@fetchMessages');
 Route::post('messages', 'ChatsController@sendMessage');
+
+Route::post('/photo',            ['as' => 'addphoto',  'uses' =>'UploadPhotoController']);
 
 Route::group( [ 'middleware' => 'admin', 'prefix' => 'admin' ], function () {
     Route::get('dashboard', function() { echo "HELLO WORLD"; } );

@@ -11,7 +11,7 @@ window.Vue = require('vue');
 //Vue.component('example', require('./components/Example.vue'));
 Vue.component('chat-messages', require('./components/ChatMessages.vue'));
 Vue.component('chat-form', require('./components/ChatForm.vue'));
-Vue.component('new-photo', require('./components/NewPhoto.vue'));
+// Vue.component('new-photo', require('./components/NewPhoto.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -27,11 +27,18 @@ const app = new Vue({
             .listen('MessageSent', (e) => {
                 this.messages.push({
                     message: e.message.message,
-                    message: e.message.photo_url,
+                    photo_url: e.message.photo_url,
+                    is_photo:e.message.is_photo,
                     user: e.user
                 });
             });
 
+
+    },
+    updated(){
+        var container =app.$refs.messageDisplay;
+        // var container = document.getElementById('#chatcontainer');
+        container.scrollTop = container.scrollHeight;
     },
 
     methods: {
@@ -39,6 +46,7 @@ const app = new Vue({
             axios.get('/messages').then(response => {
                 this.messages = response.data;
             });
+           // this.scrollToBottom('#chat-container')
         },
 
         addMessage(message) {
@@ -47,20 +55,45 @@ const app = new Vue({
             axios.post('/messages', message).then(response => {
                 console.log(response.data);
             });
-        }
+            // this.scrollToBottom('#chat-container')
+        },
+        update(e) {
+            e.preventDefault();
+
+            let photoname = this.gatherFormData();
+
+            axios.post('photo', photoname )
+                .then(response => this.messages.push({
+                    message: response.data.message.message,
+                    photo_url: response.data.message.photo_url,
+                    is_photo:response.data.message.is_photo,
+                    user: response.data.user
+                }));
+            // this.scrollToBottom('#chat-container')
+            // axios.post('photo', photoname )
+            //     .then(response => {console.log(response.data);
+            //     });
+            // this.messages = [] ;
+            // this.fetchMessages();
+
+        },
+
+        gatherFormData() {
+            const data = new FormData();
+
+            data.append('photo', this.$refs.photo.files[0]);
+
+            return data;
+        },
+        // scrollToBottom(id) {
+        //     var container = document.getElementById(id);
+        //     container.scrollTop = container.scrollHeight;
+        // },
+        // scrollToEnd(id) {
+        //     var container = this.$el.querySelector(id);
+        //     container.scrollTop = container.scrollHeight;
+        // },
+
+
     }
 });
-
-//window.Vue = require('vue');
-
-// /**
-//  * Next, we will create a fresh Vue application instance and attach it to
-//  * the page. Then, you may begin adding components to this application
-//  * or customize the JavaScript scaffolding to fit your unique needs.
-//  */
-//
-// Vue.component('example', require('./components/Example.vue'));
-
-// const app = new Vue({
-//     el: '#app'
-// });

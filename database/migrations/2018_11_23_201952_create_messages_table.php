@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->text('message');
             $table->string('photo_url')->default (null);
+            $table->bigInteger('is_photo')->default(0);
             $table->timestamps();
         });
     }
